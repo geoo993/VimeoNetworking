@@ -35,20 +35,6 @@
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
-            buildForTesting = "NO"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "018B9FAB1C9B34050054650E"
-               BuildableName = "VimeoNetworkingExample-iOSTests.xctest"
-               BlueprintName = "VimeoNetworkingExample-iOSTests"
-               ReferencedContainer = "container:VimeoNetworkingExample-iOS.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "NO"
             buildForProfiling = "NO"
@@ -56,7 +42,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BB1FA6116B3567AF972E8AE2A2D861F5"
+               BlueprintIdentifier = "90E79AE09EF3D7920B6B99ED3E708D50"
                BuildableName = "VimeoNetworking-iOS-Unit-Tests.xctest"
                BlueprintName = "VimeoNetworking-iOS-Unit-Tests"
                ReferencedContainer = "container:../Pods/Pods.xcodeproj">
@@ -75,7 +61,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BB1FA6116B3567AF972E8AE2A2D861F5"
+               BlueprintIdentifier = "90E79AE09EF3D7920B6B99ED3E708D50"
                BuildableName = "VimeoNetworking-iOS-Unit-Tests.xctest"
                BlueprintName = "VimeoNetworking-iOS-Unit-Tests"
                ReferencedContainer = "container:../Pods/Pods.xcodeproj">
