@@ -40,7 +40,7 @@ private protocol Cache
 }
 
 /// Response cache handles the storage of JSON response dictionaries indexed by their associated `Request`.  It contains both memory and disk caching functionality
-final public class ResponseCache
+final internal class ResponseCache
 {
     private struct Constant
     {
