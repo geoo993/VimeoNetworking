@@ -25,6 +25,7 @@ Pod::Spec.new do |s|
   s.dependency "AFNetworking", "3.1.0"
 
   s.test_spec "Tests" do |test_spec|
+    test_spec.requires_app_host = false
     test_spec.source_files = "VimeoNetworking/Tests/*.{swift}"
     test_spec.dependency "OHHTTPStubs/Swift", "6.0.0"
     test_spec.resource_bundles = { "Fixtures" => ["VimeoNetworking/Tests/Response Data/*.{json}"] }
