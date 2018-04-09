@@ -38,6 +38,7 @@
     {
       "name": "Tests",
       "test_type": "unit",
+      "requires_app_host": false,
       "source_files": "VimeoNetworking/Tests/*.{swift}",
       "dependencies": {
         "OHHTTPStubs/Swift": [
