@@ -143,14 +143,14 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/VimeoNetworking-iOS/VimeoNetworking.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/AFNetworking-iOS/AFNetworking.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/OHHTTPStubs-iOS/OHHTTPStubs.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/VimeoNetworking-tvOS/VimeoNetworking.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/AFNetworking-tvOS/AFNetworking.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/OHHTTPStubs-tvOS/OHHTTPStubs.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/VimeoNetworking-iOS/VimeoNetworking.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/AFNetworking-iOS/AFNetworking.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/OHHTTPStubs-iOS/OHHTTPStubs.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/VimeoNetworking-tvOS/VimeoNetworking.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/AFNetworking-tvOS/AFNetworking.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/OHHTTPStubs-tvOS/OHHTTPStubs.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

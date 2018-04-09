@@ -25,7 +25,7 @@
 //
 
 import XCTest
-@testable import VimeoNetworkingExample_iOS
+@testable import VimeoNetworking
 
 class ModelObjectValidationTests: XCTestCase
 {

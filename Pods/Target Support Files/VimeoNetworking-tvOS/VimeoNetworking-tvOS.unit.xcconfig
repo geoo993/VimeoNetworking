@@ -1,4 +1,4 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking-iOS" "${PODS_CONFIGURATION_BUILD_DIR}/OHHTTPStubs-iOS" "${PODS_CONFIGURATION_BUILD_DIR}/VimeoNetworking-iOS"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking-tvOS" "${PODS_CONFIGURATION_BUILD_DIR}/OHHTTPStubs-tvOS" "${PODS_CONFIGURATION_BUILD_DIR}/VimeoNetworking-tvOS"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
 OTHER_LDFLAGS = -ObjC -framework "AFNetworking" -framework "OHHTTPStubs" -framework "VimeoNetworking"

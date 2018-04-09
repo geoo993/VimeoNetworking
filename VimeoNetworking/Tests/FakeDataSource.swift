@@ -25,7 +25,7 @@
 //
 
 import Foundation
-@testable import VimeoNetworkingExample_iOS
+@testable import VimeoNetworking
 
 class FakeDataSource<T: VIMMappable>
 {
