@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "VimeoNetworking"
-  s.version      = "3.0.1"
+  s.version      = "3.1.0"
   s.swift_version = "4.1"
   s.summary      = "A library for interacting with the Vimeo API."
   s.description  = "An iOS/tvOS library for interacting with the Vimeo API."
