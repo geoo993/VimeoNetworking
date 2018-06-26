@@ -29,102 +29,50 @@ import XCTest
 
 class ResponseCacheTests: XCTestCase
 {
-    private let responseCache = ResponseCache(cacheDirectory: "com.vimeo.tests.Caches")
-    
-    override func setUp()
-    {
-        super.setUp()
-        
-        responseCache.clear()
-    }
-    
-    func test_ResponseCache_CanStoreAndRetrieveResponse()
-    {
-        let request = Request<VIMCategory>(path: "/test/path")
-        let categoryJSONDict = ResponseUtilities.loadResponse(from: "categories-animation-response.json")
-        
-        self.responseCache.setResponse(responseDictionary: categoryJSONDict!, forRequest: request)
-        
-        self.responseCache.response(forRequest: request) { result in
-            switch result
-            {
-            case .success(let responseDictionary):
-                XCTAssertNotNil(responseDictionary)
-                
-            case .failure(let error):
-                XCTFail("\(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func test_ResponseCache_CanRemoveResponseFromCache()
-    {
-        let request1 = Request<VIMCategory>(path: "/test/path1")
-        let request2 = Request<VIMCategory>(path: "/test/path2")
-        
-        let categoryJSONDict = ResponseUtilities.loadResponse(from: "categories-animation-response.json")
-        
-        self.responseCache.setResponse(responseDictionary: categoryJSONDict!, forRequest: request1)
-        self.responseCache.setResponse(responseDictionary: categoryJSONDict!, forRequest: request2)
-        
-        self.responseCache.removeResponse(forKey: request1.cacheKey)
-        
-        self.responseCache.response(forRequest: request1) { result in
-            switch result
-            {
-            case .success(let responseDictionary):
-                XCTAssertNil(responseDictionary)
-                
-            case .failure(let error):
-                XCTFail("\(error.localizedDescription)")
-            }
-        }
-        
-        self.responseCache.response(forRequest: request2) { result in
-            switch result
-            {
-            case .success(let responseDictionary):
-                XCTAssertNotNil(responseDictionary)
-                
-            case .failure(let error):
-                XCTFail("\(error.localizedDescription)")
-            }
-        }
-    }
+    private static let cacheDirectory = "com.vimeo.test.cache"
+    private static let testFileName = "testDictionary"
+    private let responseCache = ResponseCache(cacheDirectory: ResponseCacheTests.cacheDirectory)
  
-    func test_ResponseCache_clearRemovesAllEntries()
+    func test_clear_removesAllEntries_fromDisk()
     {
-        let request1 = Request<VIMCategory>(path: "/test/path1")
-        let request2 = Request<VIMCategory>(path: "/test/path2")
+        let testDictionary: [String: String] = ["Hello": "There"]
+        let data = NSKeyedArchiver.archivedData(withRootObject: testDictionary)
+        let fileManager = FileManager()
+        let directory = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
+        let url = URL(fileURLWithPath: directory).appendingPathComponent(ResponseCacheTests.cacheDirectory, isDirectory: true)
+        let directoryPath = url.path
+        let fileURL = url.appendingPathComponent(ResponseCacheTests.testFileName)
         
-        let categoryJSONDict = ResponseUtilities.loadResponse(from: "categories-animation-response.json")
+        do
+        {
+            if fileManager.fileExists(atPath: directoryPath) == false
+            {
+                try fileManager.createDirectory(atPath: directoryPath, withIntermediateDirectories: true, attributes: nil)
+            }
+            else
+            {
+                XCTFail("Aborting test, test dirctory already exists.")
+            }
+            
+            if fileManager.createFile(atPath: fileURL.path, contents: data, attributes: nil) == false
+            {
+                XCTFail("Could not store test object.")
+            }
+        }
+        catch let error
+        {
+            XCTFail("Failed to archive test data with error: \(error)")
+        }
         
-        self.responseCache.setResponse(responseDictionary: categoryJSONDict!, forRequest: request1)
-        self.responseCache.setResponse(responseDictionary: categoryJSONDict!, forRequest: request2)
-        
+        XCTAssertTrue(fileManager.fileExists(atPath: directoryPath))
         self.responseCache.clear()
         
-        self.responseCache.response(forRequest: request1) { result in
-            switch result
-            {
-            case .success(let responseDictionary):
-                XCTAssertNil(responseDictionary)
-                
-            case .failure(let error):
-                XCTFail("\(error.localizedDescription)")
-            }
+        let expectation = self.expectation(description: "Test cache was successfully removed.")
+        DispatchQueue.main.async {
+            XCTAssertFalse(fileManager.fileExists(atPath: directoryPath) == false)
+            expectation.fulfill()
         }
         
-        self.responseCache.response(forRequest: request2) { result in
-            switch result
-            {
-            case .success(let responseDictionary):
-                XCTAssertNil(responseDictionary)
-                
-            case .failure(let error):
-                XCTFail("\(error.localizedDescription)")
-            }
-        }
+        self.waitForExpectations(timeout: 2.0, handler: nil)
     }
-
 }
