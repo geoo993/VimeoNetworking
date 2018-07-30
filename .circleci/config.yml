@@ -6,15 +6,15 @@ jobs:
   build-and-test:
     macos:
       xcode: 9.4.1
-      steps:
-          - checkout
-          - run:
-            name: Run tests
-            command: bundle exec fastlane scan
-          # - store_test_results:
-          #     path: build/Logs
-          # - store_artifacts:
-          #     path: xcodebuild.log
+    steps:
+        - checkout
+        - run:
+          name: Run tests
+          command: bundle exec fastlane scan
+        - store_artifacts:
+            path: xcodebuild.log
+        - store_test_results:
+            path: build/Logs
 
 # workflows:
 #   version: 2
