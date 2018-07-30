@@ -18,15 +18,15 @@ jobs:
             - v1-gems-{{ checksum "Gemfile.lock" }}
             - v1-gems-
       - run:
-        name: Bundle install
-        command: bundle check || bundle install
-        environment:
-          BUNDLE_JOBS: 4
-          BUNDLE_RETRY: 3
+          name: Bundle install
+          command: bundle check || bundle install
+          environment:
+            BUNDLE_JOBS: 4
+            BUNDLE_RETRY: 3
       - save_cache:
           keys:
             - v1-gems-{{ checksum "Gemfile.lock" }}
-        paths:
+          paths:
             - vendor/bundle
 
       - store_test_results:
