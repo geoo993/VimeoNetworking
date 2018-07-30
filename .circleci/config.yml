@@ -27,7 +27,7 @@ jobs:
           keys:
             - v1-gems-{{ checksum "Gemfile.lock" }}
         paths:
-          - vendor/bundle
+            - vendor/bundle
 
       - store_test_results:
           path: output/scan
