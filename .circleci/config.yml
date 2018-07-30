@@ -12,8 +12,16 @@ jobs:
     shell: /bin/bash --login -o pipefail
     
     steps:
+      - run: 
+          name: Try to resolve nokogiri issues
+          command: gem uninstall nokogiri
+          command: xcode-select --install
+          command: gem install nokogiri
+
       - checkout
-      - run: bundle clean & bundle install
+      - run: 
+          name: Bundle clean and install
+          command: bundle clean & bundle install
       - restore_cache:
           keys:
             # - v1-gems-{{ checksum "Gemfile.lock" }}
