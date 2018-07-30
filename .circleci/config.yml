@@ -12,10 +12,11 @@ jobs:
     shell: /bin/bash --login -o pipefail
     
     steps:
+      - checkout
       - restore_cache:
-        keys:
-          - v1-gems-{{ checksum "Gemfile.lock" }}
-          - v1-gems-
+          keys:
+            - v1-gems-{{ checksum "Gemfile.lock" }}
+            - v1-gems-
       - run:
         name: Bundle install
         command: bundle check || bundle install
@@ -23,12 +24,11 @@ jobs:
           BUNDLE_JOBS: 4
           BUNDLE_RETRY: 3
       - save_cache:
-        keys:
-          - v1-gems-{{ checksum "Gemfile.lock" }}
+          keys:
+            - v1-gems-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
-      
-      - checkout
+
       - store_test_results:
           path: output/scan
       - store_artifacts:
