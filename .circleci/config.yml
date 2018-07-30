@@ -12,7 +12,6 @@ jobs:
     shell: /bin/bash --login -o pipefail
     
     steps:
-      - checkout
       - restore_cache:
         keys:
           - v1-gems-{{ checksum "Gemfile.lock" }}
@@ -28,6 +27,8 @@ jobs:
           - v1-gems-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
+      
+      - checkout
       - store_test_results:
           path: output/scan
       - store_artifacts:
