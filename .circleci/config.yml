@@ -17,7 +17,7 @@ jobs:
           name: Set Ruby version
           command: echo "ruby-2.4" > ~/.ruby-version
       - run:
-          name: Bundle clean and install
+          name: Bundle clean & install
           command: bundle clean & bundle install
       - restore_cache:
           keys:
