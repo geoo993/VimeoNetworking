@@ -1,3 +1,51 @@
-{
-  "message" : "Permission denied"
-}
+# .circleci/config.yml
+
+version: 2
+
+jobs:
+  build-and-test:
+    macos:
+      xcode: 9.4.1
+      steps:
+          - checkout
+          - run:
+            name: Run tests
+            command: bundle exec fastlane scan
+          - store_test_results:
+              path: build/Logs
+          - store_artifacts:
+              path: xcodebuild.log
+
+workflows:
+  version: 2
+  build-and-deploy:
+      jobs: build-and-test
+
+  # deploy: 
+  #   macos:
+  #     xcode: "9.4.1"
+
+
+###
+
+
+# general:
+#   artifacts:
+#     - "xcodebuild.log"
+#     - "build/Logs"
+# machine:
+#   xcode:
+#     version: 9.0.1
+
+# dependencies:
+#     override:
+#         - bundle install
+#     cache_directories:
+#         - "~/.cocoapods"
+#         - "vendor/bundle"
+
+# test:
+#   override:
+#     - bundle exec fastlane test
+#   post:
+#     - bash <(curl -s https://codecov.io/bash) -J 'VimeoNetworking' -D build
