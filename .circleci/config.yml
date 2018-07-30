@@ -1,35 +1,33 @@
 version: 2
 jobs:
   build:
+    environment:
+      BUNDLE_PATH: vendor/bundle
     macos:
       xcode: "9.4.1"
-    working_directory: /Users/distiller/project
-    # environment:
-    #   FL_OUTPUT_DIR: output
-    #   FASTLANE_LANE: test
+    working_directory: /Users/distiller/VimeoNetworking
     shell: /bin/bash --login -o pipefail
     steps:
       - checkout
       - restore_cache:
         keys:
-          - gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-
-      - run: bundle install --path vendor/bundle
-
+          - v1-gems-{{ checksum "Gemfile.lock" }}
+          - v1-gems-
+      - run:
+        name: Bundle install
+        command: bundle check || bundle install
+        environment:
+          BUNDLE_JOBS: 4
+          BUNDLE_RETRY: 3
       - save_cache:
         keys: 
-          - gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          - v1-gems-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
-
-      # - run:
-      #     name: Fastlane
-      #     command: bundle exec fastlane $FASTLANE_LANE
-
+      - store_test_results:
+        path: output/scan
       - store_artifacts:
           path: output
-      - store_test_results:
-          path: output/scan
 
 ### Original circleci.yml
 
