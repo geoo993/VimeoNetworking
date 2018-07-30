@@ -13,7 +13,7 @@ jobs:
     
     steps:
       - checkout
-      - run: bundle install & bundle clean
+      - run: bundle clean & bundle install
       - restore_cache:
           keys:
             # - v1-gems-{{ checksum "Gemfile.lock" }}
