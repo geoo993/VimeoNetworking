@@ -1,32 +1,25 @@
-# .circleci/config.yml
-
 version: 2
-
 jobs:
   build-and-test:
     macos:
       xcode: "9.4.1"
+    # working_directory: /Users/distiller/project
+    # environment:
+    #   FL_OUTPUT_DIR: output
+    #   FASTLANE_LANE: test
+    shell: /bin/bash --login -o pipefail
     steps:
-        - checkout
-        - run: bundle install
-        - run:
-          name: Run tests
-          command: bundle exec fastlane scan
-        - store_artifacts:
-            path: xcodebuild.log
-        - store_test_results:
-            path: build/Logs
+      - checkout
+      - run: bundle install
+      # - run:
+      #     name: Fastlane
+      #     command: bundle exec fastlane $FASTLANE_LANE
+      - store_artifacts:
+          path: output
+      - store_test_results:
+          path: output/scan
 
-# workflows:
-#   version: 2
-#   build-and-deploy:
-#       jobs: build-and-test
-
-  # deploy: 
-  #   macos:
-  #     xcode: "9.4.1"
-
-###
+### Original circleci.yml
 
 # general:
 #   artifacts:
