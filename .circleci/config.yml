@@ -16,7 +16,6 @@ jobs:
           name: Try to resolve nokogiri issues
           command: gem uninstall nokogiri
           command: xcode-select --install
-          command: gem install nokogiri
 
       - checkout
       - run: 
