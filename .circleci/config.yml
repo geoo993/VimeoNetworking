@@ -4,7 +4,7 @@ jobs:
   build:
 
     macos:
-      xcode: "9.3"
+      xcode: "9.2.0"
     working_directory: /Users/distiller/VimeoNetworking
     environment:
       BUNDLE_PATH: vendor/bundle
