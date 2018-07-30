@@ -11,10 +11,10 @@ jobs:
           - run:
             name: Run tests
             command: bundle exec fastlane scan
-          - store_test_results:
-              path: build/Logs
-          - store_artifacts:
-              path: xcodebuild.log
+          # - store_test_results:
+          #     path: build/Logs
+          # - store_artifacts:
+          #     path: xcodebuild.log
 
 workflows:
   version: 2
