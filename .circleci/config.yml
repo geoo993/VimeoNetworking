@@ -4,7 +4,7 @@ jobs:
   build:
 
     macos:
-      xcode: "9.0"
+      xcode: "9.3"
     working_directory: /Users/distiller/VimeoNetworking
     environment:
       BUNDLE_PATH: vendor/bundle
@@ -13,10 +13,10 @@ jobs:
     
     steps:
       - checkout
-      - run: 
-          name: Bundle clean and install
-          command: bundle clean
-          command: bundle install
+      - run: bundle clean & bundle install
+          # name: Bundle clean and install
+          # command: bundle clean
+          # command: bundle install
       - restore_cache:
           keys:
             # - v1-gems-{{ checksum "Gemfile.lock" }}
