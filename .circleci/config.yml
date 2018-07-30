@@ -21,21 +21,12 @@ jobs:
           command: bundle clean & bundle install
       - restore_cache:
           keys:
-            # - v1-gems-{{ checksum "Gemfile.lock" }}
-            - v1-gems-{{ .BuildNum }}
+            - v1-gems-{{ checksum "Gemfile.lock" }}
             - v1-gems-
-      # - run:
-      #     name: Bundle install
-      #     command: bundle check || bundle install
-      #     environment:
-      #       BUNDLE_JOBS: 4
-      #       BUNDLE_RETRY: 3
       - save_cache:
           paths:
             - ~/.bundle
-          # key: v1-gems-{{ checksum "Gemfile.lock" }}
-          key: v1-gems-{{ .BuildNum }}
-
+          key: v1-gems-{{ checksum "Gemfile.lock" }}
 
       - store_test_results:
           path: output/scan
