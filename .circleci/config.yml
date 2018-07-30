@@ -15,7 +15,8 @@ jobs:
       - checkout
       - run: 
           name: Bundle clean and install
-          command: bundle clean & bundle install
+          command: bundle clean
+          command: bundle install
       - restore_cache:
           keys:
             # - v1-gems-{{ checksum "Gemfile.lock" }}
