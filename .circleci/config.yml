@@ -3,17 +3,28 @@ jobs:
   build:
     macos:
       xcode: "9.4.1"
-    # working_directory: /Users/distiller/project
+    working_directory: /Users/distiller/project
     # environment:
     #   FL_OUTPUT_DIR: output
     #   FASTLANE_LANE: test
     shell: /bin/bash --login -o pipefail
     steps:
       - checkout
-      - run: bundle install --path .bundle
+      - restore_cache:
+        keys:
+          - gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+
+      - run: bundle install --path vendor/bundle
+
+      - save_cache:
+        keys: gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+
       # - run:
       #     name: Fastlane
       #     command: bundle exec fastlane $FASTLANE_LANE
+      
       - store_artifacts:
           path: output
       - store_test_results:
