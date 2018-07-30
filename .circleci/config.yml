@@ -4,7 +4,7 @@ jobs:
   build:
 
     macos:
-      xcode: "9.4.1"
+      xcode: "9.0"
     working_directory: /Users/distiller/VimeoNetworking
     environment:
       BUNDLE_PATH: vendor/bundle
@@ -12,11 +12,6 @@ jobs:
     shell: /bin/bash --login -o pipefail
     
     steps:
-      - run: 
-          name: Try to resolve nokogiri issues
-          command: gem uninstall nokogiri
-          command: xcode-select --install
-
       - checkout
       - run: 
           name: Bundle clean and install
