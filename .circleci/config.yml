@@ -13,10 +13,12 @@ jobs:
     
     steps:
       - checkout
-      - run: bundle clean & bundle install
-          # name: Bundle clean and install
-          # command: bundle clean
-          # command: bundle install
+      - run:
+          name: Set Ruby version
+          command: echo "ruby-2.4" > ~/.ruby-version
+      - run:
+          name: Bundle clean and install
+          command: bundle clean & bundle install
       - restore_cache:
           keys:
             # - v1-gems-{{ checksum "Gemfile.lock" }}
