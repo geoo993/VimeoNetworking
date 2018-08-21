@@ -33,7 +33,7 @@ jobs:
           command: bundle exec fastlane scan
           environment:
             SCAN_DEVICE: iPhone 8
-            SCAN_SCHEME: VimeoKit-Example
+            SCAN_SCHEME: VimeoNetworkingExample-iOS
 
       - save_cache:
           paths:
