@@ -2,27 +2,39 @@ version: 2
 
 jobs:
   build-and-test:
-
-    macos:
-      xcode: "9.4.1"
-    working_directory: /Users/distiller/VimeoNetworking
     environment:
       BUNDLE_PATH: vendor/bundle
       FL_OUTPUT_DIR: output
+    macos:
+      xcode: "9.4.1"
+    working_directory: ~/VimeoNetworking
     shell: /bin/bash --login -o pipefail
     
     steps:
       - checkout
-      - run:
+
+      - run: 
           name: Set Ruby version
           command: echo "ruby-2.4" > ~/.ruby-version
+
       - restore_cache:
-          keys:
-            - v1-gems-{{ checksum "Gemfile.lock" }}
-            - v1-gems-
-      - run:
-          name: Bundle install
+          key: v1-gems-{{ checksum "Gemfile.lock" }}
+
+      - run: 
+          name: Install bundler dependencies
           command: bundle install
+
+      - run: 
+          name: Install pods
+          command: bundle exec pod install
+
+      - run: 
+          name: Build and run tests
+          command: fastlane scan
+          environment:
+            SCAN_DEVICE: iPhone 8
+            SCAN_SCHEME: VimeoKit-Example
+
       - save_cache:
           paths:
             - vendor/bundle
@@ -30,6 +42,7 @@ jobs:
 
       - store_test_results:
           path: output/scan
+
       - store_artifacts:
           path: output
 
