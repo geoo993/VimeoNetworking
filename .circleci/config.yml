@@ -24,9 +24,9 @@ jobs:
           name: Install bundler dependencies
           command: bundle install --path vendor/bundle
 
-      - run: 
-          name: Install pods
-          command: bundle exec pod install
+      # - run: 
+      #     name: Install pods
+      #     command: bundle exec pod install
 
       - run: 
           name: Build and run iOS tests
