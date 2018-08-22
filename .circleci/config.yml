@@ -11,14 +11,14 @@ jobs:
     shell: /bin/bash --login -o pipefail
     
     steps:
+      - checkout
+      
       - restore_cache:
           key: v1-gems-{{ checksum "Gemfile.lock" }}
 
       - run: 
           name: Set Ruby version
           command: echo "ruby-2.4" > ~/.ruby-version
-
-      - checkout
 
       - run: 
           name: Install bundler dependencies
