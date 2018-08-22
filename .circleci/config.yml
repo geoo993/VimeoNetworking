@@ -29,7 +29,7 @@ jobs:
           command: bundle exec pod install
 
       - run: 
-          name: Build and run tests
+          name: Build and run iOS tests
           command: bundle exec fastlane scan
           environment:
             SCAN_DEVICE: iPhone 8
@@ -40,11 +40,11 @@ jobs:
             - vendor/bundle
           key: v1-gems-{{ checksum "Gemfile.lock" }}
 
-      - store_test_results:
-          path: output/scan
-
       - store_artifacts:
           path: output
+
+      - store_test_results:
+          path: output/scan
 
 workflows:
   version: 2
