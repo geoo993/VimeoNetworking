@@ -33,10 +33,11 @@
 @class PlayProgress;
 
 typedef NS_ENUM(NSUInteger, VIMVideoPlayabilityStatus) {
-    VIMVideoPlayabilityStatusUnavailable,           // Not finished transcoding
-    VIMVideoPlayabilityStatusPlayable,              // Can be played
-    VIMVideoPlayabilityStatusPurchaseRequired,      // On demand video that is not purchased
-    VIMVideoPlayabilityStatusRestricted             // User's region cannot play or purchase
+    VIMVideoPlayabilityStatusUnavailable,           // Video has not finished transcoding.
+    VIMVideoPlayabilityStatusPlayable,              // Video can be played.
+    VIMVideoPlayabilityStatusPurchaseRequired,      // On demand video that is not purchased.
+    VIMVideoPlayabilityStatusRestricted,            // User's region cannot play or purchase.
+    VIMVideoPlayabilityStatusPassword               // Video is protected by a password.
 };
 
 @interface VIMVideoPlayRepresentation : VIMModelObject
